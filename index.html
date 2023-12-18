@@ -15,4 +15,13 @@
             <button onclick="sendCommand('servo=on')">Turn On</button>
             <button onclick="sendCommand('servo=off')">Turn Off</button>
         </body>
+<script>
+    function sendCommand(command) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://24.170.53.83:9000/' + command, true);
+        xhr.send();
+    }
+</script>
+
+
     </html>

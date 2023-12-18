@@ -1,0 +1,19 @@
+ <html>
+        <head>
+            <title>ESP Web Server</title>
+            <script>
+                function sendCommand(command) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '/' + command, true);
+                    xhr.send();
+                }
+            </script>
+        </head>
+        <body>
+            <h1>ESP Web Server</h1>
+            <p>Servo Control</p>
+            <button onclick="sendCommand('servo=on')">Turn On</button>
+            <button onclick="sendCommand('servo=off')">Turn Off</button>
+        </body>
+    </html>
+    """

@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ESP Web Server</title>
+    <title>Embedded JSON Control</title>
 </head>
 <body>
-    <h1>ESP Web Server</h1>
-    <p>JSON Control</p>
-    <button onclick="turnOn()">Turn On</button>
-    <button onclick="turnOff()">Turn Off</button>
-    <p id="status">Status: Off</p>  <!-- Status display at the bottom -->
+    <h1>Embedded JSON Control</h1>
+
+    <button onclick="toggleServoStatus()">Toggle Servo</button>
+    <p id="status">Servo Status: off</p>
+
+    <script type="application/json" id="jsonData">
+        {
+            "servoStatus": "off"
+        }
+    </script>
 
     <script>
-        var isOn = false;
+        function toggleServoStatus() {
+            var jsonDataElem = document.getElementById('jsonData');
+            var statusElem = document.getElementById('status');
 
-        function turnOn() {
-            isOn = true;
-            updateStatus();
-            setTimeout(turnOff, 10000);  // Automatically turn off after 10 seconds
+            // Parse the embedded JSON data
+            var jsonData = JSON.parse(jsonDataElem.textContent);
+
+            // Toggle the servoStatus
+            if (jsonData.servoStatus === "off") {
+                jsonData.servoStatus = "on";
+            } else {
+                jsonData.servoStatus = "off";
+            }
+
+            // Update the status text
+            statusElem.textContent = 'Servo Status: ' + jsonData.servoStatus;
+
+            // Update the embedded JSON data
+            jsonDataElem.textContent = JSON.stringify(jsonData);
+
+            // You can also send an HTTP request to update the server if needed
+            // Example: sendHttpRequest(jsonData.servoStatus);
         }
-
-        function turnOff() {
-            isOn = false;
-            updateStatus();
-        }
-
-        function updateStatus() {
-    var xhr = new XMLHttpRequest();
-    var timestamp = Date.now();  // Get the current timestamp
-    var command = isOn ? 'on' : 'off';
-    
-    // Append the timestamp to the URL to bypass caching
-    var github_json_url = 'https://raw.githubusercontent.com/chICK31/Motor-control/main/data.json?' + timestamp;
-    
-    xhr.open('GET', github_json_url, true);
-    xhr.send();
-    var statusElem = document.getElementById('status');
-    statusElem.textContent = 'Status: ' + (isOn ? 'On' : 'Off');
-}
-
     </script>
 </body>
 </html>

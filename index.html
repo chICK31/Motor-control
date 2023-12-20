@@ -1,44 +1,17 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Embedded JSON Control</title>
-</head>
-<body>
-    <h1>Embedded JSON Control</h1>
-
-    <button onclick="toggleServoStatus()">Toggle Servo</button>
-    <p id="status">Servo Status: off</p>
-
-    <script type="application/json" id="jsonData">
-    {
-        "servoStatus": "off"
-    }
-    </script>
-
+    <title>Servo Control</title>
     <script>
         function toggleServoStatus() {
-            var jsonDataElem = document.getElementById('jsonData');
-            var statusElem = document.getElementById('status');
-
-            try {
-                // Parse the embedded JSON data
-                var jsonData = JSON.parse(jsonDataElem.textContent);
-
-                // Toggle the servoStatus
-                if (jsonData.servoStatus === "off") {
-                    jsonData.servoStatus = "on";
-                } else {
-                    jsonData.servoStatus = "off";
-                }
-
-                // Update the status text
-                statusElem.textContent = 'Servo Status: ' + jsonData.servoStatus;
-
-                // Update the embedded JSON data
-                jsonDataElem.textContent = JSON.stringify(jsonData);
-            } catch (error) {
-                console.error("Error parsing JSON:", error);
-            }
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'toggleServoStatus.json', true);
+            xhr.send();
         }
     </script>
+</head>
+<body>
+    <h1>Servo Control Interface</h1>
+    <button onclick="toggleServoStatus()">Toggle Servo</button>
 </body>
 </html>

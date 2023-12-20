@@ -8,6 +8,7 @@
     <p>JSON Control</p>
     <button onclick="turnOn()">Turn On</button>
     <button onclick="turnOff()">Turn Off</button>
+    <p id="status">Status: Off</p>  <!-- Status display at the bottom -->
 
     <script>
         var isOn = false;
@@ -28,6 +29,8 @@
             var command = isOn ? 'on' : 'off';
             xhr.open('GET', '/control?command=' + command, true);  // Use '/control?' before the command
             xhr.send();
+            var statusElem = document.getElementById('status');
+            statusElem.textContent = 'Status: ' + (isOn ? 'On' : 'Off');  // Update the status display
         }
     </script>
 </body>

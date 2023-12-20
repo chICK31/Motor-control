@@ -6,9 +6,15 @@
 <body>
     <h1>ESP Web Server</h1>
     <p>Servo Control</p>
-    <button onclick="sendCommand('servo=on')">Turn On</button>
-    <button onclick="sendCommand('servo=off')">Turn Off</button>
+    <button onclick="sendCommand('control?servo=on')">Turn On</button>
+    <button onclick="sendCommand('control?servo=off')">Turn Off</button>
 
-    <script src="script.js"></script>
+    <script>
+        function sendCommand(command) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', command, true);
+            xhr.send();
+        }
+    </script>
 </body>
 </html>

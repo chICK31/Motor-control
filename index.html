@@ -16,25 +16,26 @@
 
     <script>
         function toggleServoStatus() {
-            var jsonDataElem = document.getElementById('jsonData');
-            var statusElem = document.getElementById('status');
+    var jsonDataElem = document.getElementById('jsonData');
+    var statusElem = document.getElementById('status');
 
-            // Parse the embedded JSON data
-            var jsonData = JSON.parse(jsonDataElem.textContent);
+    // Access the JSON data using innerHTML
+    var jsonData = JSON.parse(jsonDataElem.innerHTML);
 
-            // Toggle the servoStatus
-            if (jsonData.servoStatus === "off") {
-                jsonData.servoStatus = "on";
-            } else {
-                jsonData.servoStatus = "off";
-            }
+    // Toggle the servoStatus
+    if (jsonData.servoStatus === "off") {
+        jsonData.servoStatus = "on";
+    } else {
+        jsonData.servoStatus = "off";
+    }
 
-            // Update the status text
-            statusElem.textContent = 'Servo Status: ' + jsonData.servoStatus;
+    // Update the status text
+    statusElem.textContent = 'Servo Status: ' + jsonData.servoStatus;
 
-            // Update the embedded JSON data
-            jsonDataElem.textContent = JSON.stringify(jsonData);
-        }
+    // Update the embedded JSON data
+    jsonDataElem.innerHTML = JSON.stringify(jsonData);
+}
+
     </script>
 </body>
 </html>

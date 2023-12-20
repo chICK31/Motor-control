@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Embedded JSON Control</title>
@@ -10,9 +9,9 @@
     <p id="status">Servo Status: off</p>
 
     <script type="application/json" id="jsonData">
-        {
-            "servoStatus": "off"
-        }
+    {
+        "servoStatus": "off"
+    }
     </script>
 
     <script>
@@ -35,9 +34,6 @@
 
             // Update the embedded JSON data
             jsonDataElem.textContent = JSON.stringify(jsonData);
-
-            // You can also send an HTTP request to update the server if needed
-            // Example: sendHttpRequest(jsonData.servoStatus);
         }
     </script>
 </body>

@@ -25,13 +25,19 @@
         }
 
         function updateStatus() {
-            var xhr = new XMLHttpRequest();
-            var command = isOn ? 'on' : 'off';
-            xhr.open('GET', '/control?command=' + command, true);  // Use '/control?' before the command
-            xhr.send();
-            var statusElem = document.getElementById('status');
-            statusElem.textContent = 'Status: ' + (isOn ? 'On' : 'Off');  // Update the status display
-        }
+    var xhr = new XMLHttpRequest();
+    var timestamp = Date.now();  // Get the current timestamp
+    var command = isOn ? 'on' : 'off';
+    
+    // Append the timestamp to the URL to bypass caching
+    var github_json_url = 'https://raw.githubusercontent.com/chICK31/Motor-control/main/data.json?' + timestamp;
+    
+    xhr.open('GET', github_json_url, true);
+    xhr.send();
+    var statusElem = document.getElementById('status');
+    statusElem.textContent = 'Status: ' + (isOn ? 'On' : 'Off');
+}
+
     </script>
 </body>
 </html>

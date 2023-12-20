@@ -5,14 +5,28 @@
 </head>
 <body>
     <h1>ESP Web Server</h1>
-    <p>Servo Control</p>
-    <button onclick="sendCommand('control?servo=on')">Turn On</button>
-    <button onclick="sendCommand('control?servo=off')">Turn Off</button>
+    <p>JSON Control</p>
+    <button onclick="turnOn()">Turn On</button>
+    <button onclick="turnOff()">Turn Off</button>
 
     <script>
-        function sendCommand(command) {
+        var isOn = false;
+
+        function turnOn() {
+            isOn = true;
+            updateStatus();
+            setTimeout(turnOff, 10000);  // Automatically turn off after 10 seconds
+        }
+
+        function turnOff() {
+            isOn = false;
+            updateStatus();
+        }
+
+        function updateStatus() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', command, true);
+            var command = isOn ? 'on' : 'off';
+            xhr.open('GET', '/control?command=' + command, true);  // Use '/control?' before the command
             xhr.send();
         }
     </script>
